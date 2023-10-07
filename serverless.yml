@@ -1,0 +1,43 @@
+service: aws-serverless-crud
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-south-1
+
+functions:
+  userCreateFunction:
+    handler: userAPI.createUser
+    events:
+      - httpApi:
+          path: /
+          method: POST
+
+  userUpdateFunction:
+    handler: userAPI.updateUser
+    events:
+      - httpApi:
+          path: /{id}
+          method: PUT
+
+  userGetAllFunction:
+    handler: userAPI.getAllUsers
+    events:
+      - httpApi:
+          path: /
+          method: GET
+
+  userGetByIdFunction:
+    handler: userAPI.getUserById
+    events:
+      - httpApi:
+          path: /{id}
+          method: GET
+
+  userDeleteByIdFunction:
+    handler: userAPI.deleteUserById
+    events:
+      - httpApi:
+          path: /{id}
+          method: DELETE
